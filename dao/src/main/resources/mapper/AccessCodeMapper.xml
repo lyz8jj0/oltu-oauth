@@ -13,4 +13,9 @@
         <result column="modifydatetime" property="modifydatetime" />
     </resultMap>
 
+    <delete id="delTimeOutCode">
+        DELETE FROM access_code WHERE #{arg0} > createdatetime
+    </delete>
+
+
 </mapper>
