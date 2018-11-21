@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group 'com.welsee'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    
+    // mybatis plus
+    compile group: 'com.baomidou', name: 'mybatis-plus-boot-starter', version: '3.0.3'
+
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.12'
+
+    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.23'
+
+    compile group: 'org.springframework', name: 'spring-context-support', version: '3.2.4.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.0.RELEASE'
+
+//    compile group: 'com.aliyun.oss', name: 'aliyun-sdk-oss', version: '2.8.3'
+
+
+}

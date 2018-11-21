@@ -1,0 +1,8 @@
+rootProject.name = 'oltu-oauth'
+
+include 'web'
+include 'common'
+include 'dao'
+include 'entity'
+include 'service'
+

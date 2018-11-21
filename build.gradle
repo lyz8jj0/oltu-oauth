@@ -1,0 +1,60 @@
+plugins {
+	id 'java'
+}
+
+group 'com.welsee'
+version '1.0-SNAPSHOT'
+
+
+allprojects{
+
+	repositories {
+		mavenLocal()
+		mavenCentral()
+	}
+
+	sourceCompatibility = 1.8
+
+	sourceSets {
+		main {
+			java {
+				srcDirs = ['src/main/java'] // 指定源码目录
+			}
+			resources {
+				srcDirs = ["src/main/resources"] //资源目录
+			}
+		}
+		test {
+			java {
+				srcDirs = ['src/test/java']
+			}
+			resources {
+				srcDirs = ["src/main/resources"]
+			}
+		}
+	}
+
+	tasks.withType(JavaCompile) {
+		options.encoding = 'UTF-8'
+	}
+
+
+
+	clean << {
+		if (file('out').exists()) {
+			file('out').deleteDir()
+		}
+		if (file('build').exists()) {
+			file('build').deleteDir()
+		}
+		if (file('classes').exists()) {
+			file('classes').deleteDir()
+		}
+
+	}
+}
+
+
+dependencies {
+	testCompile group: 'junit', name: 'junit', version: '4.12'
+}
