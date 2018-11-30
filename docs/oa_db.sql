@@ -67,5 +67,28 @@ CREATE TABLE `access_token` (
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 
+--人员表
+DROP TABLE IF EXISTS `person`;
+CREATE TABLE `person` (
+  `id` varchar(40) NOT NULL,
+  `login_id` varchar(40) NOT NULL COMMENT '登录id',
+  `realname` varchar(30) NOT NULL COMMENT '真实姓名',
+  `sex` char(2) DEFAULT NULL COMMENT '性别',
+  `person_type` varchar(40) DEFAULT NULL COMMENT '人员类型(家长/老师)' ,
+  `org_id` varchar(40) DEFAULT NULL COMMENT '机构id',
+  `tel` varchar(30) DEFAULT NULL COMMENT '电话',
+  `number` varchar(30) DEFAULT NULL COMMENT '编号',
+  `email` varchar(30) DEFAULT NULL COMMENT '邮箱',
+  `identity_no` varchar(30) DEFAULT NULL COMMENT '身份证号',
+  `card_no` varchar(30) DEFAULT NULL COMMENT '卡号',
+  `student_id` varchar(30) DEFAULT NULL COMMENT '孩子ID',
+  `start_year` varchar(30) DEFAULT NULL COMMENT '入学年份',
+  `pic` varchar(30) DEFAULT NULL COMMENT '头像',
+  `del` int(11) NOT NULL DEFAULT '0',
+  `createdatetime` datetime NOT NULL,
+  `modifydatetime` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+SET FOREIGN_KEY_CHECKS = 1;
 

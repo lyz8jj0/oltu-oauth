@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  *  服务类
  * </p>
  *
- * @author welsee
+ * @author login
  * @since 2018-11-17
  */
 public interface IAccessTokenService extends IService<AccessToken> {

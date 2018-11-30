@@ -1,4 +1,4 @@
-group 'com.welsee'
+group 'com.lxy'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

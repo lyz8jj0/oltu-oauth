@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
     public static String webVersion;
 
-
-
     @Value("${webVersion}")
     public void setWebVersion(String webVersion) {
         Config.webVersion = webVersion;

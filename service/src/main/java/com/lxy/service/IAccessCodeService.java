@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 授权码service
  *
- * @author welsee
+ * @author login
  * @since 2018-11-17
  */
 public interface IAccessCodeService extends IService<AccessCode> {

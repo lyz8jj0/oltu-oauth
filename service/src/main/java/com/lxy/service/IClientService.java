@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 第三方应用接口
  *
- * @author welsee
+ * @author login
  * @since 2018-11-17
  */
 public interface IClientService extends IService<Client> {

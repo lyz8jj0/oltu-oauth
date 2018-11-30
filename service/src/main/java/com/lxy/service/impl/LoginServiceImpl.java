@@ -8,13 +8,17 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
- * @author welsee
+ * @author login
  * @since 2018-11-17
  */
 @Service
 public class LoginServiceImpl extends ServiceImpl<LoginMapper, Login> implements ILoginService {
 
+    @Override
+    public Login selectByLoginName(String username) {
+        return baseMapper.getLoginInfoByLoginName(username);
+    }
 }

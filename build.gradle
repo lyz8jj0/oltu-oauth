@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 }
 
-group 'com.welsee'
+group 'com.lxy'
 version '1.0-SNAPSHOT'
 
 

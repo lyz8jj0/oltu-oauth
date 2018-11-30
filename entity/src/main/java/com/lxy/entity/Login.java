@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 
  * </p>
  *
- * @author welsee
+ * @author login
  * @since 2018-11-17
  */
 public class Login extends Model<Login> {

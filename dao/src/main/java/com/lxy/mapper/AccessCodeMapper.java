@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * Mapper 接口
  * </p>
  *
- * @author welsee
+ * @author login
  * @since 2018-11-17
  */
 public interface AccessCodeMapper extends BaseMapper<AccessCode> {

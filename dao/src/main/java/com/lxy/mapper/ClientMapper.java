@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * Mapper 接口
  * </p>
  *
- * @author welsee
+ * @author login
  * @since 2018-11-17
  */
 public interface ClientMapper extends BaseMapper<Client> {
