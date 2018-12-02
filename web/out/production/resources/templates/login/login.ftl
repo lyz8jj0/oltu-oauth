@@ -10,7 +10,7 @@
     <input type="hidden" name="client_id" value="${client_id}">
     <input type="hidden" name="redirect_uri" value="${redirect_uri}">
     <input type="hidden" name="response_type" value="${response_type}">
-    <input type="button" id="ajaxBtn" value="登录">
+    <input type="button" id="ajaxBtn" value="登录授权">
 </form>
 
 <script src="/node_modules/jquery/jquery-3.3.1.min.js"></script>
