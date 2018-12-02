@@ -2,43 +2,6 @@ CREATE DATABASE `uc` DEFAULT CHARACTER SET utf8 ;
 
 USE `oa`;
 
-
--- 用户登录表
-DROP TABLE IF EXISTS `login`;
-CREATE TABLE `login` (
-  `id` varchar(40) NOT NULL,
-  `loginName1` VARCHAR(30) NOT NULL COMMENT '第一用户名',
-  `loginName2` VARCHAR(30) COMMENT '第二用户名',
-  `loginName3` VARCHAR(30) COMMENT '第三用户名',
-  `loginName4` VARCHAR(30) COMMENT '第四用户名',
-  `password` VARCHAR(50) NOT NULL COMMENT '密码',
-  `realname` VARCHAR(30) NOT NULL COMMENT '真实名字',
-  `tel` VARCHAR(30) NULL COMMENT '电话',
-  `email` VARCHAR(30) NULL COMMENT '邮箱',
-  `del` int(11) NOT NULL DEFAULT 0 COMMENT '是否删除,  0未删除/1已删除',
-  `createdatetime` datetime NOT NULL COMMENT '创建时间',
-  `modifydatetime` datetime NOT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
-
-
--- 第三方应用表
-DROP TABLE IF EXISTS `client`;
-CREATE TABLE `client` (
-  `id` varchar(40) NOT NULL,
-  `client_id` varchar(40) NOT NULL COMMENT '应用id',
-  `client_secret` varchar(50) NOT NULL COMMENT '应用secret',
-  `client_name` varchar(50) NOT NULL COMMENT '应用名称',
-  `home_page` varchar(100) NOT NULL COMMENT '应用首页',
-  `logo` varchar(100) NOT NULL COMMENT '应用图标',
-  `del` int(11) NOT NULL DEFAULT '0' COMMENT '是否删除,  0未删除/1已删除',
-  `createdatetime` datetime NOT NULL COMMENT '创建时间',
-  `modifydatetime` datetime NOT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 -- code 超时时间 定为10分钟
 DROP TABLE IF EXISTS `access_code`;
 CREATE TABLE `access_code` (
@@ -66,29 +29,4 @@ CREATE TABLE `access_token` (
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-
---人员表
-DROP TABLE IF EXISTS `person`;
-CREATE TABLE `person` (
-  `id` varchar(40) NOT NULL,
-  `login_id` varchar(40) NOT NULL COMMENT '登录id',
-  `realname` varchar(30) NOT NULL COMMENT '真实姓名',
-  `sex` char(2) DEFAULT NULL COMMENT '性别',
-  `person_type` varchar(40) DEFAULT NULL COMMENT '人员类型(家长/老师)' ,
-  `org_id` varchar(40) DEFAULT NULL COMMENT '机构id',
-  `tel` varchar(30) DEFAULT NULL COMMENT '电话',
-  `number` varchar(30) DEFAULT NULL COMMENT '编号',
-  `email` varchar(30) DEFAULT NULL COMMENT '邮箱',
-  `identity_no` varchar(30) DEFAULT NULL COMMENT '身份证号',
-  `card_no` varchar(30) DEFAULT NULL COMMENT '卡号',
-  `student_id` varchar(30) DEFAULT NULL COMMENT '孩子ID',
-  `start_year` varchar(30) DEFAULT NULL COMMENT '入学年份',
-  `pic` varchar(30) DEFAULT NULL COMMENT '头像',
-  `del` int(11) NOT NULL DEFAULT '0',
-  `createdatetime` datetime NOT NULL,
-  `modifydatetime` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-SET FOREIGN_KEY_CHECKS = 1;
 
