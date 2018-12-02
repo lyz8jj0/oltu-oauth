@@ -1,23 +1,16 @@
 package com.lxy.tools;
 
 /**
- * Created by Irving on 2014/11/23.
+ * Created by lxy on 2018/11/23.
  */
 public class ConstantKey {
 
-    public static final String OAUTH_CLIENT_ID = "fbed1d1b4b1449daa4bc49397cbe2350";
-    public static final String OAUTH_CLIENT_SECRET = "fbed1d1b4b1449daa4bc49397cbe2350";
-    public static final String OAUTH_CLIENT_SCOPE = "user,order";
+    // 下面的两个值可用于第一次请求申请授权码和第二次申请token时使用
+//    public static final String OAUTH_CLIENT_ID = "fbed1d1b4b1449daa4bc49397cbe2350";
+//    public static final String OAUTH_CLIENT_SECRET = "d23e06a97e2d4887b504d2c6fdf42c0b";
 
 
+    //session中存储的用户key
     public static final String MEMBER_SESSION_KEY = "MEMBER_SESSION_KEY";
-    public static final String INVALID_CLIENT_GRANT = "VERIFY_CLIENTID_FAIL";
-    public static final String INVALID_CLIENT_SECRET = "VERIFY_CLIENT_SECRET_FAIL";
 
-
-    //OAUTH2_URL
-    public static final String OAUTH_CLIENT_CALLBACK = "http://localhost:8080/client/oauth_callback";
-    public static final String OAUTH_CLIENT_AUTHORIZE = "http://localhost:8080/oauth2/authorize";
-    public static final String OAUTH_CLIENT_ACCESS_TOKEN = "http://localhost:8080/oauth2/access_token";
-    public static final String OAUTH_CLIENT_GET_RESOURCE = "http://localhost:8080/oauth2/get_resource";
 }

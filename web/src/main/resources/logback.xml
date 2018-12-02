@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <!--日志输出路径-->
+    <!--日志输出路径(如果项目配置到你本地,此地需要改成自己的路径,日志生成路径,如果不需要可以屏蔽掉)-->
     <property name="LOG_HOME" value="/Users/lixinyu/myspace"/>
 
     <!--控制台日志输出配置-->

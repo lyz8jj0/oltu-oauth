@@ -25,9 +25,16 @@ public interface AccessCodeMapper extends BaseMapper<AccessCode> {
     /**
      * 获取授权码(code)的详细信息
      *
-     * @param clientId 应用id
+     * @param clientId          应用id
      * @param authorizationCode 授权码
      * @return
      */
     AccessCode getAccessCode(String clientId, String authorizationCode);
+
+    /**
+     * 删除授权码信息
+     *
+     * @param authorizationCode 授权码
+     */
+    void delAccessCode(String authorizationCode);
 }

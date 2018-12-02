@@ -16,6 +16,9 @@
     <delete id="delTimeOutCode">
         DELETE FROM access_code WHERE #{arg0} &gt; createdatetime
     </delete>
+    <delete id="delAccessCode">
+        DELETE FROM access_code WHERE access_code = #{arg0}
+    </delete>
 
     <select id="getAccessCode" resultMap="BaseResultMap">
         SELECT id,client_id,user_id,access_code,expires,createdatetime,modifydatetime FROM access_code WHERE client_id = #{arg0} AND access_code = #{arg1}

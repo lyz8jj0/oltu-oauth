@@ -19,10 +19,12 @@ import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.OAuthResponse;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 授权码token控制器
+ * 授权码token控制器(令牌)
  *
  * @author lxy
  * @since 2018-11-17
@@ -48,7 +50,17 @@ public class AccessTokenController {
     @Autowired
     IAccessTokenService accessTokenService;
 
+    /**
+     * 认证服务器申请令牌(AccessToken) [验证client_id、client_secret、auth code的正确性] (暂时没有使用涉及到更新令牌)
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     * @url (POST)  http://localhost:8080/oauth2/access_token?client_id={AppKey}&client_secret={AppSecret}&grant_type=authorization_code&redirect_uri={YourSiteUrl}&code={code}
+     */
     @RequestMapping(value = "access_token", method = RequestMethod.POST)
+    @ResponseBody
     public JsonResult access_token(HttpServletRequest request, HttpServletResponse response) throws Exception {
         //构建返回格式(jsonResult是自定义的)
         JsonResult jsonResult = new JsonResult();
@@ -79,6 +91,7 @@ public class AccessTokenController {
                 jsonResult.setMsg(oAuthResponse.getBody());
             }
 
+            //todo 验证第一次申请code时的redirect_uri和第这一交申请令牌的redirect_uri是否一致(必须一致才能通过) (暂时没做)
 
             //grant_type：表示使用的授权模式，必选项，传过来的值固定为"authorization_code",否则不通过
             if (GrantType.AUTHORIZATION_CODE.name().equalsIgnoreCase(oauthRequest.getParam(OAuth.OAUTH_GRANT_TYPE))) {
@@ -114,6 +127,9 @@ public class AccessTokenController {
                 //将access_token信息存入数据库,token_type：表示令牌类型，该值大小写不敏感，必选项，可以是bearer类型或mac类型,
                 //具体token_type有哪些区别可以看一下 https://blog.csdn.net/weixin_39973810/article/details/84673548,但具体何用还是不清楚,算了先存0吧,用到在改
                 accessTokenService.saveAccessToken(oauthRequest.getClientId(), uId, "0", authorizationToken, expires);
+
+                //删除授权码（code)保证授权码只能使用一次
+                accessCodeService.delAccessCode(authorizationCode);
 
                 //构建oauth2授权返回信息
                 OAuthResponse oAuthResponse = OAuthASResponse

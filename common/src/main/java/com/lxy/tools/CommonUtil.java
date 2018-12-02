@@ -2,7 +2,6 @@ package com.lxy.tools;
 
 import org.apache.oltu.oauth2.as.request.OAuthAuthzRequest;
 import org.apache.oltu.oauth2.as.request.OAuthTokenRequest;
-import sun.applet.Main;
 
 import java.util.ArrayList;
 import java.util.Calendar;

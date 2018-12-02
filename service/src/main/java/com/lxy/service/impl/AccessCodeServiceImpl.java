@@ -50,4 +50,12 @@ public class AccessCodeServiceImpl extends ServiceImpl<AccessCodeMapper, AccessC
         }
         return baseMapper.getAccessCode(clientId, authorizationCode);
     }
+
+    @Override
+    public void delAccessCode(String authorizationCode) throws Exception {
+        if(authorizationCode==null){
+            throw new ProgramException("删除授权码信息不合法！");
+        }
+        baseMapper.delAccessCode(authorizationCode);
+    }
 }

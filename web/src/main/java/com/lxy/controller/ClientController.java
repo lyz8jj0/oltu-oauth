@@ -20,12 +20,18 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/client")
 public class ClientController {
 
+    /**
+     * 生成授权码(code)后跳转的页面,将code显示到页面中
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping("oauth_callback")
     public ModelAndView oauth_callback(HttpServletRequest request) {
         String code = request.getParameter("code");
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("code",code);
+        mv.addObject("code", code);
         mv.setViewName("client/oauth_callback");
         return mv;
     }

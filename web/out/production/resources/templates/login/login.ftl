@@ -32,7 +32,7 @@
                 data: {username: username, password: password, client_id: client_id, redirect_uri: redirect_uri},
                 success: function (res) {
                     if (res.success) {
-                        if (redirect_uri == "") {
+                        if (redirect_uri == "") { //如果直接访问的登录页面而不是通过oauth跳转过来的则redirect_uri
                             window.location.href = origin;
                         } else {
                             window.location.href = origin + '/oauth2/authorize?response_type=' + response_type + '&client_id=' + client_id + '&redirect_uri=' + redirect_uri;
@@ -42,7 +42,6 @@
                     }
                 }
             }, "json")
-
         })
     })
 

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController extends BaseController {
 
     /**
-     * 首页
+     * 默认首页
      *
      * @return bmv
      */

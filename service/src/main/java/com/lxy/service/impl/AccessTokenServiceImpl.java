@@ -36,10 +36,5 @@ public class AccessTokenServiceImpl extends ServiceImpl<AccessTokenMapper, Acces
         //每次插入新的token时,删除已经过期的token
         LocalDateTime localDateTime = LocalDateTime.now().minusHours(24);
         baseMapper.delTimeOutToken(localDateTime);
-
-
-
-
-
     }
 }

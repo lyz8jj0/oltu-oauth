@@ -29,4 +29,10 @@ public interface IAccessCodeService extends IService<AccessCode> {
      * @return
      */
     AccessCode getAuthorizationCodeInfo(String clientId,String authorizationCode) throws Exception;
+
+    /**
+     * 删除授权码信息
+     * @param authorizationCode 授权码
+     */
+    void delAccessCode(String authorizationCode) throws Exception;
 }

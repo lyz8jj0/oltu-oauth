@@ -17,5 +17,4 @@
     <delete id="delTimeOutToken">
         DELETE FROM access_token WHERE #{arg0} &gt; createdatetime
     </delete>
-
 </mapper>
