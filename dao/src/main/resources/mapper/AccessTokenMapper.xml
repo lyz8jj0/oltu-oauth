@@ -4,14 +4,18 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.lxy.entity.AccessToken">
-        <id column="id" property="id" />
-        <result column="client_id" property="clientId" />
-        <result column="user_id" property="userId" />
-        <result column="access_token" property="accessToken" />
-        <result column="expires" property="expires" />
-        <result column="createdatetime" property="createdatetime" />
-        <result column="modifydatetime" property="modifydatetime" />
-        <result column="token_type" property="tokenType" />
+        <id column="id" property="id"/>
+        <result column="client_id" property="clientId"/>
+        <result column="user_id" property="userId"/>
+        <result column="access_token" property="accessToken"/>
+        <result column="expires" property="expires"/>
+        <result column="createdatetime" property="createdatetime"/>
+        <result column="modifydatetime" property="modifydatetime"/>
+        <result column="token_type" property="tokenType"/>
     </resultMap>
+
+    <delete id="delTimeOutToken">
+        DELETE FROM access_token WHERE #{arg0} &gt; createdatetime
+    </delete>
 
 </mapper>

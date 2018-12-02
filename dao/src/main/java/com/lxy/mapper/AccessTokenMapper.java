@@ -3,6 +3,8 @@ package com.lxy.mapper;
 import com.lxy.entity.AccessToken;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.time.LocalDateTime;
+
 /**
  * <p>
  *  Mapper 接口
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface AccessTokenMapper extends BaseMapper<AccessToken> {
 
+    void delTimeOutToken(LocalDateTime localDateTime);
 }

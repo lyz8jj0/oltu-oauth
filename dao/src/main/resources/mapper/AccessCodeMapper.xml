@@ -4,18 +4,22 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.lxy.entity.AccessCode">
-        <id column="id" property="id" />
-        <result column="client_id" property="clientId" />
-        <result column="user_id" property="userId" />
-        <result column="access_code" property="accessCode" />
-        <result column="expires" property="expires" />
-        <result column="createdatetime" property="createdatetime" />
-        <result column="modifydatetime" property="modifydatetime" />
+        <id column="id" property="id"/>
+        <result column="client_id" property="clientId"/>
+        <result column="user_id" property="userId"/>
+        <result column="access_code" property="accessCode"/>
+        <result column="expires" property="expires"/>
+        <result column="createdatetime" property="createdatetime"/>
+        <result column="modifydatetime" property="modifydatetime"/>
     </resultMap>
 
     <delete id="delTimeOutCode">
-        DELETE FROM access_code WHERE #{arg0} > createdatetime
+        DELETE FROM access_code WHERE #{arg0} &gt; createdatetime
     </delete>
+
+    <select id="getAccessCode" resultMap="BaseResultMap">
+        SELECT id,client_id,user_id,access_code,expires,createdatetime,modifydatetime FROM access_code WHERE client_id = #{arg0} AND access_code = #{arg1}
+    </select>
 
 
 </mapper>

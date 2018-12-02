@@ -12,13 +12,21 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IAccessCodeService extends IService<AccessCode> {
 
     /**
-     * 保存code
+     * 保存授权code
      *
-     * @param clientId          第三方应用clientId
+     * @param clientId          应用id
      * @param uId               用户id
-     * @param expires           code的过期时间
-     * @param authorizationCode oauth2产生的code
+     * @param expires           code 过期时间
+     * @param authorizationCode oauth生成的code
+     */
+    void saveAuthorizationCode(String clientId, String uId, String expires, String authorizationCode) throws Exception;
+
+
+    /**
+     * 获取code的信息
+     * @param clientId      应用ID
+     * @param authorizationCode     oauth产生的Code
      * @return
      */
-    int addAccessCode(String clientId, String uId, String expires, String authorizationCode);
+    AccessCode getAuthorizationCodeInfo(String clientId,String authorizationCode) throws Exception;
 }

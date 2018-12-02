@@ -3,10 +3,10 @@ package com.lxy.controller;
 
 import com.lxy.service.IAccessCodeService;
 import com.lxy.tools.BaseController;
+import com.lxy.tools.CommonUtil;
 import com.lxy.tools.ConstantKey;
 import com.lxy.tools.RegexUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.oltu.oauth2.as.issuer.MD5Generator;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
 import org.apache.oltu.oauth2.as.request.OAuthAuthzRequest;
@@ -17,8 +17,6 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.OAuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,12 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 /**
- * 授权码控制器
+ * 授权码code控制器
  *
- * @author login
+ * @author lxy
  * @since 2018-11-17
  */
 @Controller
@@ -40,13 +37,9 @@ import java.util.ArrayList;
 @Slf4j
 public class AccessCodeController extends BaseController {
 
-    private Cache cache;
 
     @Autowired
-    public AccessCodeController(CacheManager cacheManager) {
-        this.cache = cacheManager.getCache("oauth2-cache");
-    }
-
+    IAccessCodeService accessCodeService;
 
     /* *
      * 构建OAuth2授权请求 [需要client_id与redirect_uri绝对地址]
@@ -64,7 +57,6 @@ public class AccessCodeController extends BaseController {
             if (mv == null) {
                 mv = new ModelAndView();
             }
-
             //构建OAuth请求
             OAuthAuthzRequest oauthRequest = new OAuthAuthzRequest(request);
             //验证redirect_uri格式是否合法
@@ -81,7 +73,7 @@ public class AccessCodeController extends BaseController {
             }
 
             //验证clientId是否正确
-            if (!validateOAuth2ClientId(oauthRequest)) {
+            if (!CommonUtil.validateOAuth2ClientId(oauthRequest)) {
                 OAuthResponse oAuthResponse = OAuthASResponse
                         .errorResponse(HttpServletResponse.SC_UNAUTHORIZED) //错误请求:非法请求
                         .setError(OAuthError.CodeResponse.ACCESS_DENIED) //错误原因:拒绝访问
@@ -112,11 +104,24 @@ public class AccessCodeController extends BaseController {
             //生成授权码(authorizationCode)  使用UUIDValueGenerator或者MD5Generator
             String authorizationCode = new OAuthIssuerImpl(new MD5Generator()).authorizationCode();
             log.info("生成授权码为===============" + authorizationCode);
-            //把授权码存入缓存
-            cache.put(authorizationCode, DigestUtils.sha1Hex(oauthRequest.getClientId() + oauthRequest.getRedirectURI()));
 
-            //TODO 把授权码存入缓存,并将value值进行md5加密(暂时不用)
-            //cache.put(authorizationCode, DigestUtils.sha1Hex(oauthRequest.getClientId() + oauthRequest.getRedirectURI()));
+            //将session中的用户id取出来和code存在一起
+            String uId = session.getAttribute(ConstantKey.MEMBER_SESSION_KEY).toString();
+
+            //设置code过期时间(10分钟)
+            String expires = CommonUtil.codeExpires();
+
+            //TODO 以后可以考虑把授权码和令牌存入缓存，现在先分别存到access_code和access_token中
+
+            try {
+                //将授权的code信息存入数据库
+                accessCodeService.saveAuthorizationCode(oauthRequest.getClientId(), uId, expires, authorizationCode);
+            } catch (Exception e) {
+                mv.setViewName("oauth2/error");
+                mv.addObject("errorMsg", e.getMessage());
+                log.error("保存Code异常." + e.getMessage());
+                return mv;
+            }
 
             //构建OAuth2授权返回信息
             OAuthResponse oAuthResponse = OAuthASResponse
@@ -139,20 +144,20 @@ public class AccessCodeController extends BaseController {
         }
     }
 
-    /**
-     * 验证ClientID 是否正确
-     *
-     * @param oauthRequest OAuth请求
-     * @return boolean
-     */
-    private boolean validateOAuth2ClientId(OAuthAuthzRequest oauthRequest) {
-        //客户端clientId
-        ArrayList clientIdList = new ArrayList();
-        clientIdList.add("fbed1d1b4b1449daa4bc49397cbe2350");
-        clientIdList.add("a85b033590714fafb20db1d11aed5497");
-        clientIdList.add("d23e06a97e2d4887b504d2c6fdf42c0b");
-        return clientIdList.contains(oauthRequest.getClientId());
-    }
+//    /**
+//     * 验证ClientID 是否正确
+//     *
+//     * @param oauthRequest OAuth请求
+//     * @return boolean
+//     */
+//    private boolean validateOAuth2ClientId(OAuthAuthzRequest oauthRequest) {
+//        //客户端clientId
+//        ArrayList clientIdList = new ArrayList();
+//        clientIdList.add("fbed1d1b4b1449daa4bc49397cbe2350");
+//        clientIdList.add("a85b033590714fafb20db1d11aed5497");
+//        clientIdList.add("d23e06a97e2d4887b504d2c6fdf42c0b");
+//        return clientIdList.contains(oauthRequest.getClientId());
+//    }
 
 
 //    /**
@@ -191,5 +196,7 @@ public class AccessCodeController extends BaseController {
 //        String s = DigestUtils.sha1Hex(demo);
         System.out.println(demo);
     }
+
+
 }
 

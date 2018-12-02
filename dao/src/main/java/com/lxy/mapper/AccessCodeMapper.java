@@ -21,4 +21,13 @@ public interface AccessCodeMapper extends BaseMapper<AccessCode> {
      * @param localDateTime 超时code的一个时间结点
      */
     void delTimeOutCode(LocalDateTime localDateTime);
+
+    /**
+     * 获取授权码(code)的详细信息
+     *
+     * @param clientId 应用id
+     * @param authorizationCode 授权码
+     * @return
+     */
+    AccessCode getAccessCode(String clientId, String authorizationCode);
 }
