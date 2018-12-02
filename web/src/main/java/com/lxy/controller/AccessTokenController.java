@@ -111,7 +111,6 @@ public class AccessTokenController {
                     return jsonResult;
                 }
 
-
                 //生成token
                 OAuthIssuer oauthIssuerImpl = new OAuthIssuerImpl(new MD5Generator());
                 final String authorizationToken = oauthIssuerImpl.accessToken();

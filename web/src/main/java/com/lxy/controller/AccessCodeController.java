@@ -37,18 +37,18 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 public class AccessCodeController extends BaseController {
 
-
     @Autowired
     IAccessCodeService accessCodeService;
 
-    /* *
+    /**
      * 构建OAuth2授权请求 [需要client_id与redirect_uri绝对地址]
+     *
      * @param request
      * @param session
      * @param mv
      * @return 返回授权码(code)有效期10分钟，客户端只能使用一次[与client_id和redirect_uri一一对应关系]
      * @throws OAuthSystemException
-     * @url  http://localhost:8080/oauth2/authorize?client_id={AppKey}&response_type=code&redirect_uri={YourSiteUrl}
+     * @url http://localhost:8080/oauth2/authorize?client_id={AppKey}&response_type=code&redirect_uri={YourSiteUrl}
      * @test http://localhost:8080/oauth2/authorize?client_id=fbed1d1b4b1449daa4bc49397cbe2350&response_type=code&redirect_uri=http://localhost:8080/client/oauth_callback
      */
     @RequestMapping(value = "authorize", method = RequestMethod.GET)
@@ -143,60 +143,5 @@ public class AccessCodeController extends BaseController {
             return mv;
         }
     }
-
-//    /**
-//     * 验证ClientID 是否正确
-//     *
-//     * @param oauthRequest OAuth请求
-//     * @return boolean
-//     */
-//    private boolean validateOAuth2ClientId(OAuthAuthzRequest oauthRequest) {
-//        //客户端clientId
-//        ArrayList clientIdList = new ArrayList();
-//        clientIdList.add("fbed1d1b4b1449daa4bc49397cbe2350");
-//        clientIdList.add("a85b033590714fafb20db1d11aed5497");
-//        clientIdList.add("d23e06a97e2d4887b504d2c6fdf42c0b");
-//        return clientIdList.contains(oauthRequest.getClientId());
-//    }
-
-
-//    /**
-//     * 验证登录名和密码是否正确,如正确存入session
-//     *
-//     * @param request request请求
-//     * @return boolean
-//     */
-//    private boolean validateOAuth2Pwd(HttpServletRequest request) {
-//        if ("get".equalsIgnoreCase(request.getMethod())) {
-//            return false;
-//        }
-//        String username = request.getParameter("username");
-//        String password = request.getParameter("password");
-//
-//        //验证前台传过来的用户名密码是否为空
-//        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
-//            return false;
-//        }
-//        try {
-//            if (username.equalsIgnoreCase("lixinyu") && password.equalsIgnoreCase("123456")) {
-//                //登录成功
-//                request.getSession().setAttribute(ConstantKey.MEMBER_SESSION_KEY, "lixinyu");
-//                return true;
-//            }
-//            return false;
-//        } catch (Exception ex) {
-//            log.error("validateOAuth2Pwd Exception: " + ex.getMessage());
-//            return false;
-//        }
-//    }
-//
-
-    public static void main(String[] args) {
-        String demo = "123";
-//        String s = DigestUtils.sha1Hex(demo);
-        System.out.println(demo);
-    }
-
-
 }
 
