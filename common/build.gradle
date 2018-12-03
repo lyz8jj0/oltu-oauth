@@ -27,8 +27,6 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
     compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.0.RELEASE'
     
-    // https://mvnrepository.com/artifact/com.belerweb/pinyin4j
-    compile group: 'com.belerweb', name: 'pinyin4j', version: '2.5.0'
 
     compile(
             "org.apache.oltu.oauth2:org.apache.oltu.oauth2.authzserver:1.0.2",
