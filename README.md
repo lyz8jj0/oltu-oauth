@@ -1,4 +1,9 @@
 
+# oltu-oauth
+SpringBoot + Mybatis Plus + Gradle + oltu +OAuth2  服务端与客户端的实现
+# 项目介绍
+https://blog.csdn.net/weixin_39973810/article/details/84332228
+
 > 最近搭建基础平台涉及到oauth2和shiro，了解到这两中技术对以后的能力提升有一定的提高作用，所以尝试自己搭建个demo学习下，先把oauth2记录下，shiro过几天写写(项目源码在最下面)
 
 > 要实现OAuth服务端，就得先理解客户端的调用流程，服务提供商实现可能也有些区别，实现OAuth服务端的方式很多,这里记录的是<font color=red>授权码模式的实现</font>,有需要同学可以参考下, 这里只涉及实现,具体流程网上有很多,推荐比较好的有:[阮一峰的网络日志:理解OAuth 2.0](http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
